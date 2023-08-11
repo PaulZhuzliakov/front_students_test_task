@@ -1,13 +1,30 @@
-// function validateForm(){
-//     var last_name = document.getElementById("last_name").value
-//     if (last_name == ""){
-//         alert("Необходимо ввести фамилию");
-//         return false;
-//     }
-//     return true;
-// }
+function validateForm(){
+    const last_name = document.getElementById("last_name").value;
+    const first_name = document.getElementById("first_name").value;
+    const group = document.getElementById("group").value;
 
-function FullStackBookToDo() {
+    if (last_name === ""){
+        alert("Необходимо ввести фамилию");
+        return false;
+    }
+    if (first_name === ""){
+        alert("Необходимо ввести фамилию");
+        return false;
+    }
+    if (group === ""){
+        alert("Необходимо ввести группу");
+        return false;
+    }
+    return true;
+}
+
+fetchStudents = async function () {
+    const todos = await fetch("http://localhost:8080/students").then((res) => res.json());
+    td.todos = todos
+    showData(todos)
+}
+
+function StudentsJournal() {
     const td = {}
     td.API_URL = "http://localhost:8080/students";
 
@@ -18,9 +35,8 @@ function FullStackBookToDo() {
     }
 
     td.fetchStudents = async function () {
-        const todos = await fetch("http://localhost:8080/students").then((res) => res.json());
-        td.todos = todos
-        showData(todos)
+        const students = await fetch("http://localhost:8080/students").then((res) => res.json());
+        showData(students)
     }
 
     function showData(studentList){
@@ -39,5 +55,5 @@ function FullStackBookToDo() {
 
 }
 
-const app = new FullStackBookToDo()
+const app = new StudentsJournal()
 app.init()
