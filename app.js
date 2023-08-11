@@ -41,13 +41,15 @@ function StudentsJournal() {
 
     function showData(studentList){
         var html= ""
-        studentList.forEach(function (value){
+        studentList.forEach(function (element, index){
             html+="<tr>"
-            html+="<td>" + value.last_name + "</td>";
-            html+="<td>" + value.first_name + "</td>";
-            html+="<td>" + value.middle_name + "</td>";
-            html+="<td>" + value.birth_date + "</td>";
-            html+="<td>" + value.group + "</td>";
+            html+="<td>" + element.last_name + "</td>";
+            html+="<td>" + element.first_name + "</td>";
+            html+="<td>" + element.middle_name + "</td>";
+            html+="<td>" + element.birth_date + "</td>";
+            html+="<td>" + element.group + "</td>";
+            html+='<td><button onclick="deleteData(' + index + ')" class="btn-danger">Удалить</button>'
+            html+='<button onclick="updateData(' + index + ')" class="btn-warning">Изменить</button></td>'
             html+="</tr>"
         });
         document.querySelector("#crudTable tbody").innerHTML += html
