@@ -1,5 +1,10 @@
 const URL = "http://localhost:8080/students";
 
+function clearTable(){
+    table=document.querySelector("#crudTable");
+    while( table.rows.length > 1) table.rows[1].remove();
+}
+
 function validateForm() {
     const last_name = document.getElementById("last_name").value;
     const first_name = document.getElementById("first_name").value;
@@ -57,6 +62,8 @@ function AddData() {
                     alert(response.status)
                     if (response.status === 200) {
                         clearInputs();
+                        clearTable();
+                        fetchStudents().then(() => {})
                     }
                     if (response.status !== 200) {
                         console.log('Ошибка. Status Code: ' +
@@ -77,40 +84,34 @@ function AddData() {
 }
 
 function StudentsJournal() {
-    const td = {};
 
     this.init = async function () {
         document.addEventListener("DOMContentLoaded", async function () {
-            await td.fetchStudents();
+            await fetchStudents();
         });
     }
 
-    td.fetchStudents = async function () {
+    fetchStudents = async function () {
         const students = await fetch(URL).then((res) => res.json());
-        td.students = students;
         showData(students);
-    }
-
-    function showData(studentList) {
-        let html = "";
-        studentList.forEach(function (element, index) {
-            html += "<tr>";
-            html += "<td>" + element.last_name + "</td>";
-            html += "<td>" + element.first_name + "</td>";
-            html += "<td>" + element.middle_name + "</td>";
-            html += "<td>" + element.birth_date + "</td>";
-            html += "<td>" + element.group + "</td>";
-            html += '<td><button onclick="deleteData(' + index + ')" class="btn-danger">Удалить</button>';
-            html += '<button onclick="updateData(' + index + ')" class="btn-warning">Изменить</button></td>';
-            html += "</tr>";
-        });
-        document.querySelector("#crudTable tbody").innerHTML += html;
-        var table = document.getElementById("crudTable");
-        var rowCount = table.rows.length;
-        var row = table.rows[rowCount - 1];
-        table.deleteRow(row);
     }
 }
 
 const app = new StudentsJournal();
 app.init();
+
+function showData(studentList) {
+    let html = "";
+    studentList.forEach(function (element, index) {
+        html += "<tr>";
+        html += "<td>" + element.last_name + "</td>";
+        html += "<td>" + element.first_name + "</td>";
+        html += "<td>" + element.middle_name + "</td>";
+        html += "<td>" + element.birth_date + "</td>";
+        html += "<td>" + element.group + "</td>";
+        html += '<td><button onclick="deleteData(' + index + ')" class="btn-danger">Удалить</button>';
+        html += '<button onclick="updateData(' + index + ')" class="btn-warning">Изменить</button></td>';
+        html += "</tr>";
+    });
+    document.querySelector("#crudTable tbody").innerHTML += html;
+}
