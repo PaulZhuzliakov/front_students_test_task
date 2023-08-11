@@ -50,7 +50,7 @@ function StudentsJournal() {
             html+="<td>" + value.group + "</td>";
             html+="</tr>"
         });
-        document.querySelector("#crudTable tbody").innerHTML = html
+        document.querySelector("#crudTable tbody").innerHTML += html
     }
 
 }
