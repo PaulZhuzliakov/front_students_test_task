@@ -1,8 +1,8 @@
 const URL = "http://localhost:8080/students";
 
-function clearTable(){
-    table=document.querySelector("#crudTable");
-    while( table.rows.length > 1) table.rows[1].remove();
+function clearTable() {
+    let table = document.querySelector("#crudTable");
+    while (table.rows.length > 1) table.rows[1].remove();
 }
 
 function validateForm() {
@@ -59,11 +59,11 @@ function AddData() {
             }, body: JSON.stringify(student)
         })
             .then(response => {
-                    alert(response.status)
                     if (response.status === 200) {
                         clearInputs();
                         clearTable();
-                        fetchStudents().then(() => {})
+                        fetchStudents().then(() => {
+                        })
                     }
                     if (response.status !== 200) {
                         console.log('Ошибка. Status Code: ' +
@@ -75,12 +75,39 @@ function AddData() {
             )
             .then(myJson => {
                 console.log(JSON.stringify(myJson));
-                alert(myJson);
             })
             .catch(err => {
                 console.log('Fetch Error :-S', err);
             });
     }
+}
+
+function deleteData(index) {
+    fetch(URL + "/" + index, {
+        method: 'DELETE'
+    })
+        .then(response => {
+                if (response.status === 200) {
+                    clearInputs();
+                    clearTable();
+                    fetchStudents().then(() => {
+                    })
+                }
+                if (response.status !== 200) {
+                    console.log('Ошибка. Status Code: ' +
+                        response.status);
+                }
+                console.log(response.headers.get("Content-Type"));
+                return response;
+            }
+        )
+        .then(myJson => {
+            console.log(JSON.stringify(myJson));
+        })
+        .catch(err => {
+            console.log(err);
+        });
+
 }
 
 function StudentsJournal() {
@@ -109,7 +136,7 @@ function showData(studentList) {
         html += "<td>" + element.middle_name + "</td>";
         html += "<td>" + element.birth_date + "</td>";
         html += "<td>" + element.group + "</td>";
-        html += '<td><button onclick="deleteData(' + index + ')" class="btn-danger">Удалить</button>';
+        html += '<td><button onclick="deleteData(' + element.id + ')" class="btn-danger">Удалить</button>';
         html += '<button onclick="updateData(' + index + ')" class="btn-warning">Изменить</button></td>';
         html += "</tr>";
     });
