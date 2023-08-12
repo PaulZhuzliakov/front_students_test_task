@@ -35,9 +35,17 @@
                 <label for="group">Группа</label>
                 <input type="text" name="group" class="form-control" id="group" placeholder="Введите группу">
             </div>
+<!--            скрытый input. Сохраняет id изменяемого студента для PUT запроса.-->
+<!--            при нажатии на кнопку "изменить" в столбце со студентом, параметры студента вносятся в соответствующие поля ввода-->
+<!--            в том числе и в это скрытое поле id-->
+<!--            после редактирования студента при нажатии на кнопку "Изменить студента" DTO формируется из полей ввода-->
+            <div class="form-group col-md-6 mb-3">
+                <label for="id"></label>
+                <input type="hidden" name="" class="form-control" id="id">
+            </div>
             <div class="col-lg-12 mt-5">
-                <button class="btn btn-success" id="Submit" onclick="AddData()">Сохранить студента</button>
-                <button class="btn btn-primary" id="Update" onclick="UpdateData()">Изменить студента</button>
+                <button class="btn btn-success" id="Submit" onclick="saveStudent()">Сохранить студента</button>
+                <button class="btn btn-primary" id="Update" onclick="updateStudent()">Изменить студента</button>
             </div>
         </div>
     </div>
@@ -47,8 +55,8 @@
             <table class="table table-bordered" id="crudTable">
                 <thread>
                     <tr>
-                        <th>Имя</th>
                         <th>Фамилия</th>
+                        <th>Имя</th>
                         <th>Отчество</th>
                         <th>Дата рождения</th>
                         <th>Группа</th>
