@@ -1,4 +1,4 @@
-const URL = "http://localhost:8080/students";
+const URL = "https://backstudentstesttask-production.up.railway.app/students";
 
 //переключат кнопку "Сохранить студента" на "Изменить студента"
 function switchAddToEditBtn(studentEntity) {
