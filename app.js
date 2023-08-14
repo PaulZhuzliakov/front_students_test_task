@@ -1,6 +1,6 @@
 //адрес сервиса. если поднимать сервис локально, то заменить на -
-const URL = "http://localhost:8080/students";
-// const URL = "https://backstudentstesttask-production.up.railway.app/students";
+// const URL = "http://localhost:8080/students";
+const URL = "https://backstudentstesttask-production.up.railway.app/students";
 
 //переключает кнопку "Сохранить студента" на "Изменить студента"
 function switchAddToEditBtn(studentEntity) {
