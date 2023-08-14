@@ -2,6 +2,7 @@
 // const URL = "http://localhost:8080/students";
 const URL = "https://backstudentstesttask-production.up.railway.app/students";
 
+
 //переключает кнопку "Сохранить студента" на "Изменить студента"
 function switchAddToEditBtn(studentEntity) {
     document.getElementById("Update").style.display = "block";
