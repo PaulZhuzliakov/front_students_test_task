@@ -1,13 +1,15 @@
-const URL = "https://backstudentstesttask-production.up.railway.app/students";
+//адрес сервиса. если поднимать сервис локально, то заменить на -
+const URL = "http://localhost:8080/students";
+// const URL = "https://backstudentstesttask-production.up.railway.app/students";
 
-//переключат кнопку "Сохранить студента" на "Изменить студента"
+//переключает кнопку "Сохранить студента" на "Изменить студента"
 function switchAddToEditBtn(studentEntity) {
     document.getElementById("Update").style.display = "block";
     document.getElementById("Submit").style.display = "none";
     fillInputsFromStudentEntity(studentEntity);
 }
 
-//переключат кнопку "Изменить студента" на "Сохранить студента"
+//переключает кнопку "Изменить студента" на "Сохранить студента"
 function switchEditToAddBtn(studentEntity) {
     document.getElementById("Update").style.display = "none";
     document.getElementById("Submit").style.display = "block";
